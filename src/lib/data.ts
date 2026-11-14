@@ -64,6 +64,8 @@ export interface ExperienceItem {
   location: string;
   type: "experience" | "education";
   bullets: string[];
+  skills?: string[];
+  isPresent?: boolean;
 }
 
 export interface Achievement {
@@ -501,28 +503,54 @@ export const PROJECTS: Project[] = [
 
 export const EXPERIENCE: ExperienceItem[] = [
   {
-    period: "Feb 2017 – Present",
-    year: "2017–Present",
-    role: "Senior UI/UX & Graphic Designer",
+    period: "Apr 2024 – Present · 2 yrs 8 mos",
+    year: "Apr 2024 – Present",
+    role: "Sr. UI/UX Designer",
     company: "Hashbrown Systems Pvt. Ltd.",
     location: "Chandigarh, India",
     type: "experience",
+    isPresent: true,
+    skills: ["Figma", "UI/UX Design", "Design Systems", "Prototyping", "User Flows", "SaaS Dashboards"],
     bullets: [
-      "Lead designer for 10+ web and mobile products, owning design from concept through developer handoff.",
-      "Created dashboards and analytics visualizations that improved task completion by ~30%.",
-      "Optimized eCommerce flows, raising conversion rates by ~15–20%.",
-      "Built reusable component libraries to ensure design consistency across products.",
-      "Collaborated with developers and product teams through agile sprints.",
-      "Created brand identities, logos, marketing assets, social media creatives, investor pitch decks and business presentations for product launches and client engagement.",
-      "Mentored junior designers and introduced structured design review workflows.",
+      "Lead UI/UX & Product Designer for web applications, mobile apps, SaaS products, dashboards, and enterprise platforms.",
+      "Spearheaded design system architecture in Figma with modular components, tokens, and auto-layout, accelerating developer handoff by 40%.",
+      "Designed data-dense analytics visualizations and workflows that improved task completion times by ~30%.",
+      "Engineered high-converting checkout flows and mobile shopping experiences across iOS and Android.",
+    ],
+  },
+  {
+    period: "Apr 2019 – Apr 2024 · 5 yrs 1 mo",
+    year: "Apr 2019 – Apr 2024",
+    role: "Senior Graphic Designer",
+    company: "Hashbrown Systems Pvt. Ltd.",
+    location: "Chandigarh, India",
+    type: "experience",
+    skills: ["Adobe Photoshop", "Adobe Illustrator", "Brand Identity", "Visual Design", "Pitch Decks", "Marketing"],
+    bullets: [
+      "Directed end-to-end visual identities, brand systems, corporate collateral, marketing campaigns, and client pitch decks.",
+      "Designed iconography sets, digital illustration assets, and product marketing graphics across multi-channel digital touchpoints.",
+      "Collaborated directly with founders, product managers, and client stakeholders to translate business goals into memorable brand experiences.",
+    ],
+  },
+  {
+    period: "Feb 2017 – Apr 2019 · 2 yrs 3 mos",
+    year: "Feb 2017 – Apr 2019",
+    role: "Graphic Designer",
+    company: "Hashbrown Systems Pvt. Ltd.",
+    location: "Chandigarh, India",
+    type: "experience",
+    skills: ["Graphic Design", "Wireframing", "Social Media", "Print Media", "Vector Art"],
+    bullets: [
+      "Designed foundational digital creatives, website layouts, wireframes, social campaigns, infographics, and corporate presentations.",
+      "Ensured brand alignment, typography consistency, and visual polish across client deliverables and early product launches.",
     ],
   },
   {
     period: "2011 – 2014",
-    year: "2011–2014",
-    role: "B.Tech, Computer Science",
-    company: "Computer Science & Engineering",
-    location: "India",
+    year: "2011 – 2014",
+    role: "B.Tech, Computer Science & Engineering",
+    company: "Punjab Technical University",
+    location: "Punjab, India",
     type: "education",
     bullets: [
       "Focused on foundational computing, software architecture, user interface principles, and web technologies.",
@@ -530,10 +558,10 @@ export const EXPERIENCE: ExperienceItem[] = [
   },
   {
     period: "2008 – 2011",
-    year: "2008–2011",
+    year: "2008 – 2011",
     role: "Diploma, Computer Science",
-    company: "Computer Science",
-    location: "India",
+    company: "State Board of Technical Education",
+    location: "Punjab, India",
     type: "education",
     bullets: [
       "Grounding in algorithmic problem-solving, graphic programming, and digital systems.",

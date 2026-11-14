@@ -96,9 +96,16 @@ export function Experience() {
                     }`}
                   >
                     <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-                      <span className="font-mono text-xs font-bold text-[#77756f]">
-                        {item.year}
-                      </span>
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono text-xs font-bold text-[#77756f]">
+                          {item.period}
+                        </span>
+                        {item.isPresent && (
+                          <span className="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-semibold px-2.5 py-0.5 rounded-full">
+                            Present
+                          </span>
+                        )}
+                      </div>
                       <span
                         className={`font-mono text-[10px] uppercase px-2.5 py-0.5 rounded-full ${
                           item.type === "experience"
@@ -117,7 +124,7 @@ export function Experience() {
                       {item.company} · {item.location}
                     </div>
 
-                    <ul className="space-y-2 text-xs sm:text-sm text-[#3a3a3a] leading-relaxed">
+                    <ul className="space-y-2 text-xs sm:text-sm text-[#3a3a3a] leading-relaxed mb-4">
                       {item.bullets.map((b, bIdx) => (
                         <li key={bIdx} className="flex items-start gap-2.5">
                           <span className="w-1.5 h-1.5 rounded-full bg-[#0d0d0d] mt-1.5 shrink-0" />
@@ -125,6 +132,20 @@ export function Experience() {
                         </li>
                       ))}
                     </ul>
+
+                    {item.skills && item.skills.length > 0 && (
+                      <div className="pt-3 border-t border-[#0d0d0d]/10 flex flex-wrap items-center gap-1.5 text-xs text-[#52504b]">
+                        <span className="mr-1 text-xs">💎</span>
+                        {item.skills.map((skill, sIdx) => (
+                          <span
+                            key={sIdx}
+                            className="px-2 py-0.5 rounded-md bg-[#f4f2ee] font-mono text-[10px] text-[#3a3a3a] border border-[#0d0d0d]/5"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
               );

@@ -1,232 +1,264 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
-import { ACHIEVEMENTS, Achievement } from "@/lib/data";
+import { ACHIEVEMENTS } from "@/lib/data";
 
 export function Achievements() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [hasCounted, setHasCounted] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [hasAnimated, setHasAnimated] = useState(false);
 
-  // Measure scroll through the sticky container to translate horizontal track
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    const el = sectionRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") return;
 
-    let rafId: number;
-    const handleScroll = () => {
-      cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(() => {
-        const container = containerRef.current;
-        if (!container) return;
-
-        const rect = container.getBoundingClientRect();
-        const totalScrollable = container.offsetHeight - window.innerHeight;
-
-        if (totalScrollable > 0) {
-          const current = -rect.top;
-          const ratio = Math.max(0, Math.min(1, current / totalScrollable));
-          setScrollProgress(ratio);
-
-          if (ratio > 0.05 && !hasCounted) {
-            setHasCounted(true);
-          }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHasAnimated(true);
+          observer.disconnect();
         }
-      });
-    };
+      },
+      { threshold: 0.2 }
+    );
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      cancelAnimationFrame(rafId);
-    };
-  }, [hasCounted]);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section
       id="achievements"
-      ref={containerRef}
-      className="relative w-full border-t border-[#0d0d0d]/10"
-      style={{
-        // Viewport height + horizontal travel distance
-        height: "350vh",
-      }}
+      ref={sectionRef}
+      className="section-pad relative w-full border-t border-[#0d0d0d]/10"
     >
-      {/* Sticky Full-Viewport Stage */}
-      <div className="sticky top-0 h-[100svh] w-full flex flex-col justify-between overflow-hidden pt-20 pb-10">
-        {/* Header with Title and Track Progress Bar */}
-        <div className="page-container w-full">
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <div className="section-tag mb-1">
-                <span>05</span>
-                <span>—</span>
-                <span>Milestones</span>
+      <div className="page-container">
+        {/* Section Header */}
+        <div className="section-tag">
+          <span>05</span>
+          <span>—</span>
+          <span>Milestones</span>
+        </div>
+
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div>
+            <h2 className="section-heading mb-3">
+              Proven metrics &amp; <em>real scale.</em>
+            </h2>
+            <p className="text-sm sm:text-base text-[#77756f] max-w-xl font-normal leading-relaxed">
+              Design is more than visuals — it is measurable business impact. Here is what 9+ years of craft has delivered in production.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-2 self-start md:self-auto font-mono text-xs text-[#0d0d0d] bg-white border border-[#0d0d0d]/10 px-4 py-2 rounded-full shadow-sm">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span>Verified Production Impact</span>
+          </div>
+        </div>
+
+        {/* Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Card 1 (Spans 2 cols on desktop for visual rhythm) */}
+          <div className="lg:col-span-2 card-surface p-8 sm:p-10 flex flex-col justify-between border border-[#0d0d0d]/10 hover:border-[#0d0d0d]/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+            <div className="flex items-start justify-between mb-8">
+              <span className="font-mono text-[11px] uppercase tracking-wider text-[#77756f] bg-[#f4f2ee] px-3 py-1 rounded-full border border-[#0d0d0d]/5">
+                UI/UX Leadership · Hashbrown Systems
+              </span>
+              <span className="font-mono text-xs text-[#a9a6a0]">01 / 06</span>
+            </div>
+
+            <div className="my-auto">
+              <div className="text-5xl sm:text-7xl font-bold tracking-tight text-[#0d0d0d] mb-4 font-sans flex items-baseline">
+                <Counter target={9} active={hasAnimated} suffix="+" />
+                <span className="text-2xl sm:text-3xl font-serif italic text-[#77756f] ml-3 font-normal">
+                  Years of Craft
+                </span>
               </div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#0d0d0d]">
-                Numbers &amp; <em>scale.</em>
-              </h2>
+              <h3 className="text-xl font-bold tracking-tight text-[#0d0d0d] mb-2">
+                From Junior Designer to Product Design Lead
+              </h3>
+              <p className="text-sm text-[#52504b] leading-relaxed max-w-2xl">
+                Led end-to-end design across 10+ live platforms — driving user research, wireframing, high-fidelity prototypes, component design systems, and seamless developer handoff.
+              </p>
             </div>
 
-            {/* Horizontal Track Progress Bar */}
-            <div className="w-28 sm:w-44 h-1.5 bg-[#0d0d0d]/10 rounded-full overflow-hidden">
-              <div
-                className="h-full bg-[#0d0d0d] rounded-full transition-transform duration-75 origin-left"
-                style={{ transform: `scaleX(${scrollProgress})` }}
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Sliding Card Track (translates left as scroll advances) */}
-        <div className="w-full overflow-hidden py-6">
-          <div
-            ref={trackRef}
-            className="flex items-center gap-6 sm:gap-8 px-6 sm:px-12 md:px-20 will-change-transform"
-            style={{
-              transform: `translateX(-${scrollProgress * 75}%)`,
-              transition: "transform 0.1s linear",
-            }}
-          >
-            {ACHIEVEMENTS.map((card, idx) => {
-              // Calculate proximity to center for 12px lift effect
-              // Cards are 6 total, spread across progress 0 to 1
-              const cardCenterProgress = idx / (ACHIEVEMENTS.length - 1);
-              const distance = Math.abs(scrollProgress - cardCenterProgress);
-              const isCenter = distance < 0.15;
-
-              return (
-                <AchievementCard
-                  key={card.index}
-                  card={card}
-                  isCenter={isCenter}
-                  hasCounted={hasCounted}
-                />
-              );
-            })}
-
-            {/* Track End Card: "and counting →" */}
-            <div className="w-[clamp(280px,30vw,360px)] h-[clamp(260px,36vh,310px)] rounded-[28px] border-2 border-dashed border-[#0d0d0d]/20 flex flex-col items-center justify-center p-8 shrink-0 select-none">
-              <span className="font-mono text-xs uppercase text-[#77756f] mb-2">
-                CONTINUOUS EVOLUTION
-              </span>
-              <span className="font-serif italic text-3xl sm:text-4xl text-[#0d0d0d]">
-                and counting →
-              </span>
+            <div className="pt-6 mt-6 border-t border-[#0d0d0d]/10 flex flex-wrap items-center gap-2 font-mono text-[10px] text-[#77756f]">
+              <span className="font-semibold text-[#0d0d0d]">Key Focus:</span>
+              <span>Design Systems</span>
+              <span>·</span>
+              <span>Web &amp; Mobile Architecture</span>
+              <span>·</span>
+              <span>Team Mentorship</span>
             </div>
           </div>
-        </div>
 
-        {/* Bottom Helper Hint */}
-        <div className="page-container w-full flex items-center justify-between text-xs font-mono text-[#a9a6a0]">
-          <span>SCROLL DOWN TO ADVANCE CARDS</span>
-          <span>{Math.round(scrollProgress * 100)}%</span>
+          {/* Card 2: 10+ Live Products */}
+          <div className="card-surface p-8 sm:p-10 flex flex-col justify-between border border-[#0d0d0d]/10 hover:border-[#0d0d0d]/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+            <div className="flex items-start justify-between mb-8">
+              <span className="font-mono text-[11px] uppercase tracking-wider text-[#77756f] bg-[#f4f2ee] px-3 py-1 rounded-full border border-[#0d0d0d]/5">
+                Scale &amp; Breadth
+              </span>
+              <span className="font-mono text-xs text-[#a9a6a0]">02 / 06</span>
+            </div>
+
+            <div className="my-auto">
+              <div className="text-5xl sm:text-6xl font-bold tracking-tight text-[#0d0d0d] mb-3 font-sans">
+                <Counter target={10} active={hasAnimated} suffix="+" />
+              </div>
+              <h3 className="text-lg font-bold tracking-tight text-[#0d0d0d] mb-2">
+                Live Products Shipped
+              </h3>
+              <p className="text-xs sm:text-sm text-[#52504b] leading-relaxed">
+                Active in production across eCommerce, outdoor media audit, B2B marketplaces, and enterprise SaaS.
+              </p>
+            </div>
+
+            <div className="pt-6 mt-6 border-t border-[#0d0d0d]/10 font-mono text-[10px] text-emerald-700 flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+              <span>Available on iOS, Android &amp; Web</span>
+            </div>
+          </div>
+
+          {/* Card 3: ~30% Task Completion */}
+          <div className="card-surface p-8 sm:p-10 flex flex-col justify-between border border-[#0d0d0d]/10 hover:border-[#0d0d0d]/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+            <div className="flex items-start justify-between mb-8">
+              <span className="font-mono text-[11px] uppercase tracking-wider text-[#77756f] bg-[#f4f2ee] px-3 py-1 rounded-full border border-[#0d0d0d]/5">
+                Efficiency
+              </span>
+              <span className="font-mono text-xs text-[#a9a6a0]">03 / 06</span>
+            </div>
+
+            <div className="my-auto">
+              <div className="text-5xl sm:text-6xl font-bold tracking-tight text-[#0d0d0d] mb-3 font-sans">
+                <Counter target={30} active={hasAnimated} prefix="~" suffix="%" />
+              </div>
+              <h3 className="text-lg font-bold tracking-tight text-[#0d0d0d] mb-2">
+                Faster Task Execution
+              </h3>
+              <p className="text-xs sm:text-sm text-[#52504b] leading-relaxed">
+                Measured speedup through redesigned data visualization, dense dashboards, and simplified operational workflows.
+              </p>
+            </div>
+
+            <div className="pt-6 mt-6 border-t border-[#0d0d0d]/10 font-mono text-[10px] text-[#77756f]">
+              Platform: OOH Audit &amp; Meridian Portals
+            </div>
+          </div>
+
+          {/* Card 4: 15–20% Conversion Lift */}
+          <div className="card-surface p-8 sm:p-10 flex flex-col justify-between border border-[#0d0d0d]/10 hover:border-[#0d0d0d]/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+            <div className="flex items-start justify-between mb-8">
+              <span className="font-mono text-[11px] uppercase tracking-wider text-[#77756f] bg-[#f4f2ee] px-3 py-1 rounded-full border border-[#0d0d0d]/5">
+                Conversion
+              </span>
+              <span className="font-mono text-xs text-[#a9a6a0]">04 / 06</span>
+            </div>
+
+            <div className="my-auto">
+              <div className="text-5xl sm:text-6xl font-bold tracking-tight text-[#0d0d0d] mb-3 font-sans">
+                <Counter target={20} active={hasAnimated} prefix="15–" suffix="%" />
+              </div>
+              <h3 className="text-lg font-bold tracking-tight text-[#0d0d0d] mb-2">
+                eCommerce Checkout Lift
+              </h3>
+              <p className="text-xs sm:text-sm text-[#52504b] leading-relaxed">
+                Optimized browsing, product discovery, and friction-free payment journeys for luxury home décor retail.
+              </p>
+            </div>
+
+            <div className="pt-6 mt-6 border-t border-[#0d0d0d]/10 font-mono text-[10px] text-[#77756f]">
+              Platform: Eikaebana Mobile &amp; Web
+            </div>
+          </div>
+
+          {/* Card 5: 50K+ Audience Reach */}
+          <div className="card-surface p-8 sm:p-10 flex flex-col justify-between border border-[#0d0d0d]/10 hover:border-[#0d0d0d]/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+            <div className="flex items-start justify-between mb-8">
+              <span className="font-mono text-[11px] uppercase tracking-wider text-[#77756f] bg-[#f4f2ee] px-3 py-1 rounded-full border border-[#0d0d0d]/5">
+                Creative Storytelling
+              </span>
+              <span className="font-mono text-xs text-[#a9a6a0]">05 / 06</span>
+            </div>
+
+            <div className="my-auto">
+              <div className="text-5xl sm:text-6xl font-bold tracking-tight text-[#0d0d0d] mb-3 font-sans">
+                <Counter target={50} active={hasAnimated} suffix="K+" />
+              </div>
+              <h3 className="text-lg font-bold tracking-tight text-[#0d0d0d] mb-2">
+                Audience &amp; Media Reach
+              </h3>
+              <p className="text-xs sm:text-sm text-[#52504b] leading-relaxed">
+                Character design, AI-assisted visual media, and high-retention educational animation assets.
+              </p>
+            </div>
+
+            <div className="pt-6 mt-6 border-t border-[#0d0d0d]/10 font-mono text-[10px] text-[#77756f]">
+              Platform: SmartToonKids &amp; Social
+            </div>
+          </div>
+
+          {/* Card 6: 100% Engineering Alignment (Spans 3 cols on desktop for strong closing) */}
+          <div className="lg:col-span-3 card-surface p-8 sm:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border border-[#0d0d0d]/10 hover:border-[#0d0d0d]/30 hover:shadow-xl transition-all duration-300 bg-white">
+            <div className="max-w-2xl">
+              <span className="font-mono text-[10px] uppercase tracking-wider text-[#77756f] block mb-2">
+                Handoff &amp; Collaboration
+              </span>
+              <h3 className="text-2xl font-bold tracking-tight text-[#0d0d0d] mb-2">
+                100% Developer-Aligned Design Systems
+              </h3>
+              <p className="text-sm text-[#52504b] leading-relaxed">
+                I bridge the gap between design and development by delivering production-ready tokens, modular variants, and pixel-precise responsive specs in Figma.
+              </p>
+            </div>
+
+            <a
+              href="#contact"
+              className="btn-primary text-xs shrink-0 self-start md:self-center"
+            >
+              Start a Conversation ↗
+            </a>
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-function AchievementCard({
-  card,
-  isCenter,
-  hasCounted,
+function Counter({
+  target,
+  active,
+  prefix = "",
+  suffix = "",
 }: {
-  card: Achievement;
-  isCenter: boolean;
-  hasCounted: boolean;
+  target: number;
+  active: boolean;
+  prefix?: string;
+  suffix?: string;
 }) {
-  const [currentVal, setCurrentVal] = useState(0);
+  const [val, setVal] = useState(0);
 
-  // easeOutQuart counter over 1.4s
   useEffect(() => {
-    if (!hasCounted) return;
-
-    const duration = 1400;
+    if (!active) return;
+    const duration = 1200;
     const start = performance.now();
-    let animId: number;
+    let id: number;
 
-    const animate = (now: number) => {
-      const elapsed = now - start;
-      const progress = Math.min(1, elapsed / duration);
-      // easeOutQuart: 1 - (1 - t)^4
-      const ease = 1 - Math.pow(1 - progress, 4);
-      setCurrentVal(Math.round(ease * card.targetNumber));
-
-      if (progress < 1) {
-        animId = requestAnimationFrame(animate);
-      }
+    const tick = (now: number) => {
+      const p = Math.min(1, (now - start) / duration);
+      // easeOutCubic
+      const ease = 1 - Math.pow(1 - p, 3);
+      setVal(Math.round(ease * target));
+      if (p < 1) id = requestAnimationFrame(tick);
     };
 
-    animId = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(animId);
-  }, [hasCounted, card.targetNumber]);
+    id = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(id);
+  }, [active, target]);
 
   return (
-    <div
-      style={{
-        transform: isCenter ? "translateY(-12px)" : "translateY(0px)",
-        transition: "transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease",
-      }}
-      className={`w-[clamp(340px,40vw,540px)] h-[clamp(260px,36vh,310px)] rounded-[28px] bg-white p-7 sm:p-9 flex flex-col justify-between shrink-0 select-none relative ${
-        isCenter
-          ? "shadow-[0_24px_54px_rgba(13,13,13,0.12)] ring-1 ring-[#0d0d0d]/10"
-          : "shadow-[0_8px_24px_rgba(13,13,13,0.04)] border border-[#0d0d0d]/10"
-      }`}
-    >
-      {/* Top: 72px Logo Tile with soft glow & Index */}
-      <div className="flex items-center justify-between">
-        <div className="relative">
-          {/* Soft platform glow */}
-          <div
-            className={`absolute inset-0 rounded-2xl blur-md opacity-25 ${
-              card.platformKey === "oohaudit"
-                ? "bg-blue-500"
-                : card.platformKey === "eikaebana"
-                ? "bg-pink-500"
-                : card.platformKey === "instagram" || card.platformKey === "smarttoonkids"
-                ? "bg-purple-500"
-                : "bg-emerald-500"
-            }`}
-          />
-          <div className="relative w-14 h-14 rounded-2xl bg-[#f4f2ee] flex items-center justify-center font-mono font-bold text-xs text-[#0d0d0d] border border-[#0d0d0d]/10 shadow-sm">
-            {card.platformKey.substring(0, 3).toUpperCase()}
-          </div>
-        </div>
-
-        <span className="font-mono text-xs font-semibold text-[#77756f]">
-          {card.index}
-        </span>
-      </div>
-
-      {/* Bottom Content & Huge Counter Number */}
-      <div className="flex items-end justify-between gap-4">
-        {/* Left: Label, Caption, Detail */}
-        <div className="max-w-[260px]">
-          <span className="font-mono text-[10px] uppercase text-[#77756f] tracking-wider block mb-1">
-            {card.caption}
-          </span>
-          <h4 className="text-xl sm:text-2xl font-bold tracking-tight text-[#0d0d0d] mb-1">
-            {card.label}
-          </h4>
-          <p className="text-xs text-[#52504b] leading-relaxed line-clamp-2">
-            {card.detail}
-          </p>
-        </div>
-
-        {/* Right: Huge Animated Number */}
-        <div className="text-right">
-          <div className="text-4xl sm:text-5xl md:text-6xl font-black font-sans tracking-tight text-[#0d0d0d]">
-            {card.prefix || ""}
-            {hasCounted ? currentVal : 0}
-            {card.suffix || ""}
-          </div>
-          <span className="font-mono text-[10px] uppercase text-[#a9a6a0] block text-right">
-            VERIFIED
-          </span>
-        </div>
-      </div>
-    </div>
+    <span>
+      {prefix}
+      {active ? val : 0}
+      {suffix}
+    </span>
   );
 }
