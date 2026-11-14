@@ -170,29 +170,50 @@ export function Achievements() {
             </div>
           </div>
 
-          {/* Card 5: 50K+ Audience Reach */}
+          {/* Card 5: AI-Accelerated Design Suite */}
           <div className="card-surface p-8 sm:p-10 flex flex-col justify-between border border-[#0d0d0d]/10 hover:border-[#0d0d0d]/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
-            <div className="flex items-start justify-between mb-8">
-              <span className="font-mono text-[11px] uppercase tracking-wider text-[#77756f] bg-[#f4f2ee] px-3 py-1 rounded-full border border-[#0d0d0d]/5">
-                Creative Storytelling
+            <div className="flex items-start justify-between mb-6">
+              <span className="font-mono text-[11px] uppercase tracking-wider text-[#77756f] bg-[#f4f2ee] px-3 py-1 rounded-full border border-[#0d0d0d]/5 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse" />
+                <span>Next-Gen Workflow</span>
               </span>
               <span className="font-mono text-xs text-[#a9a6a0]">05 / 06</span>
             </div>
 
             <div className="my-auto">
               <div className="text-5xl sm:text-6xl font-bold tracking-tight text-[#0d0d0d] mb-3 font-sans">
-                <Counter target={50} active={hasAnimated} suffix="K+" />
+                <Counter target={7} active={hasAnimated} suffix="+" />
               </div>
               <h3 className="text-lg font-bold tracking-tight text-[#0d0d0d] mb-2">
-                Audience &amp; Media Reach
+                AI Tools in Daily Craft
               </h3>
-              <p className="text-xs sm:text-sm text-[#52504b] leading-relaxed">
-                Character design, AI-assisted visual media, and high-retention educational animation assets.
+              <p className="text-xs sm:text-sm text-[#52504b] leading-relaxed mb-4">
+                Augmenting research, rapid wireframing, copywriting, and visual asset iteration with next-gen AI tools.
               </p>
+
+              {/* AI Tool Chips */}
+              <div className="flex flex-wrap gap-1.5">
+                {[
+                  "ChatGPT",
+                  "Claude",
+                  "Gemini",
+                  "Antigravity",
+                  "Meta AI",
+                  "Stitch",
+                  "Nano Banana",
+                ].map((tool) => (
+                  <span
+                    key={tool}
+                    className="px-2 py-0.5 rounded-md bg-[#f4f2ee] border border-[#0d0d0d]/5 font-mono text-[10px] text-[#3a3a3a] group-hover:bg-[#0d0d0d] group-hover:text-[#f4f2ee] transition-colors"
+                  >
+                    {tool}
+                  </span>
+                ))}
+              </div>
             </div>
 
-            <div className="pt-6 mt-6 border-t border-[#0d0d0d]/10 font-mono text-[10px] text-[#77756f]">
-              Platform: SmartToonKids &amp; Social
+            <div className="pt-5 mt-5 border-t border-[#0d0d0d]/10 font-mono text-[10px] text-[#77756f]">
+              Workflow: 3x Faster Exploration &amp; Research Synthesis
             </div>
           </div>
 

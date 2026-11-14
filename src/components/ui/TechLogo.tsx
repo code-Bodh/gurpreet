@@ -15,6 +15,8 @@ export function isBrand(key: string): boolean {
     "gemini",
     "stitch",
     "meta",
+    "antigravity",
+    "nanobanana",
   ];
   return brandKeys.includes(key.toLowerCase());
 }
@@ -155,6 +157,27 @@ export function TechLogo({
         <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
           <circle cx="24" cy="24" r="22" fill="#0081FB" />
           <path d="M14 24C14 21 16 19 18.5 19C21 19 23 21 24 23.5C25 21 27 19 29.5 19C32 19 34 21 34 24C34 27 32 29 29.5 29C27 29 25 27 24 24.5C23 27 21 29 18.5 29C16 29 14 27 14 24Z" stroke="#ffffff" strokeWidth="3" fill="none" />
+        </svg>
+      );
+
+    case "antigravity":
+    case "agy":
+      return (
+        <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
+          <circle cx="24" cy="24" r="22" fill="#0d0d0d" />
+          <circle cx="24" cy="24" r="14" stroke="#ffffff" strokeWidth="2" strokeDasharray="4 2" />
+          <path d="M24 14L31 24L24 34L17 24Z" fill="#ffffff" />
+          <circle cx="24" cy="24" r="3" fill="#0d0d0d" />
+        </svg>
+      );
+
+    case "nanobanana":
+    case "banana":
+      return (
+        <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className}>
+          <circle cx="24" cy="24" r="22" fill="#FEF08A" />
+          <path d="M14 34C21 35 32 29 34 14C31 15 26 18 21 23C16 28 14.5 32 14 34Z" fill="#EAB308" />
+          <path d="M34 14C35 12 37 11 38 10C36.5 12.5 35.5 13.5 34 14Z" fill="#16A34A" />
         </svg>
       );
 

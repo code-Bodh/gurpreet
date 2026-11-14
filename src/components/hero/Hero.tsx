@@ -14,7 +14,7 @@ export function Hero() {
   const [isVoicePlaying, setIsVoicePlaying] = useState(false);
   const [autoplayBlocked, setAutoplayBlocked] = useState(false);
 
-  // Play audio greeting: "Hey, I am Gurpreet, senior UI/UX designer."
+  // Play youthful, energetic audio greeting with full introduction & AI tools
   const playGreeting = () => {
     const audio = audioRef.current;
     if (audio) {
@@ -29,8 +29,11 @@ export function Hero() {
           // Web Speech fallback if audio file playback is blocked
           if (typeof window !== "undefined" && "speechSynthesis" in window) {
             window.speechSynthesis.cancel();
-            const utter = new SpeechSynthesisUtterance("Hey, I am Gurpreet, senior UI/UX designer.");
-            utter.rate = 0.95;
+            const utter = new SpeechSynthesisUtterance(
+              "Hi, I am Gurpreet! Lead UI/UX and product designer. With over nine years of craft, I design mobile apps, web applications, SaaS dashboards, and scalable design systems. I also leverage modern AI tools like ChatGPT, Claude, Gemini, and Antigravity to create intuitive user experiences faster and smarter. Welcome to my portfolio!"
+            );
+            utter.rate = 1.05;
+            utter.pitch = 1.25;
             utter.onend = () => {
               setIsVoicePlaying(false);
               setIsMuted(true);
@@ -174,7 +177,7 @@ export function Hero() {
                 aria-label={
                   isVoicePlaying
                     ? "Pause voice intro"
-                    : "Play voice intro: Hey I am Gurpreet, senior UI/UX designer"
+                    : "Listen to Gurpreet: Lead UI/UX designer and AI tools overview"
                 }
                 className="w-[46px] h-[46px] rounded-full bg-[#0d0d0d] text-[#ffffff] flex items-center justify-center shadow-lg transition-transform duration-300 hover:scale-105 active:scale-95"
               >
@@ -202,7 +205,9 @@ export function Hero() {
               </button>
               {/* Tooltip */}
               <div className="absolute right-full top-1/2 -translate-y-1/2 mr-3 px-3 py-1.5 rounded-xl bg-[#0d0d0d] text-[#f4f2ee] text-[11px] font-mono tracking-tight whitespace-nowrap opacity-0 group-hover/sound:opacity-100 transition-opacity pointer-events-none shadow-md">
-                {isVoicePlaying ? "Playing intro..." : 'Voice: "Hey, I am Gurpreet..."'}
+                {isVoicePlaying
+                  ? "Playing intro (Lead UI/UX & AI Tools)..."
+                  : 'Voice: "Hi, I am Gurpreet! Lead UI/UX..."'}
               </div>
             </div>
           </div>
