@@ -37,6 +37,7 @@ export interface Skill {
   brandKey?: string;
   description?: string;
   projects: string[];
+  footerLine?: string;
 }
 
 export interface Project {
@@ -82,14 +83,14 @@ export const PROFILE: Profile = {
   name: "Gurpreet Kaur",
   firstName: "GURPREET",
   initials: "GK",
-  role: "Senior UI/UX Designer",
+  role: "Senior UI/UX & Graphic Designer",
   headline: "Websites, Mobile Apps, SaaS & eCommerce",
   location: "Chandigarh, India",
   phone: "+91 98142 75335",
   phoneHref: "tel:+919814275335",
   email: "creativehead.gk@gmail.com",
   resumeSummary:
-    "Senior UI/UX Designer with 9+ years of experience leading design for websites and mobile apps, from research and wireframes to final UI and developer handoff. Lead designer on 10+ live products across eCommerce, B2B marketplaces, SaaS, and outdoor advertising. Skilled in design systems and responsive, mobile-first design, working closely with developers and product teams in agile sprints. Also mentors junior designers, creates branding and pitch decks, and uses AI tools to speed up research and asset creation.",
+    "Senior UI/UX & Graphic Designer with 9+ years of experience and 10+ live products. I design websites, dashboards, mobile apps, and eCommerce flows, plus the logos, brand identities, social creatives, and pitch decks that go with them.",
   quote:
     "Designing intuitive, human-centered systems across mobile and web—bridging research, craft, and engineering.",
   status: "Open to Remote / Hybrid / Full-Time UI/UX Roles",
@@ -119,23 +120,40 @@ export const SKILL_GROUPS: Skill[] = [
     name: "UI/UX Design",
     category: "Design",
     isBrand: false,
-    projects: ["OOH Audit", "Eikaebana", "Machine Dalal", "Election Atlas"],
+    projects: [
+      "OOH Audit",
+      "Eikaebana",
+      "Machine Dalal",
+      "Brand Manager",
+      "Moshpit",
+      "Fangorn Ops",
+      "Retitrak",
+      "EIkeabana",
+    ],
+    footerLine: "From first wireframe to final handoff.",
   },
   {
     atomicNumber: 2,
-    symbol: "Dv",
+    symbol: "Ux",
     name: "Data Visualization",
     category: "Design",
     isBrand: false,
-    projects: ["Election Atlas", "OOH Audit Brand Manager", "Meradesh"],
+    projects: [
+      "Election Atlas",
+      "Meradesh Platform",
+      "portal.meridianapi.com",
+      "Fangorn",
+    ],
+    footerLine: "From first wireframe to final handoff.",
   },
   {
     atomicNumber: 3,
-    symbol: "Db",
+    symbol: "Ux",
     name: "Dashboard Design",
     category: "Design",
     isBrand: false,
-    projects: ["OOH Audit", "Retibazaar", "purchasing.ai"],
+    projects: ["OOH Audit", "Retibazaar", "Fangorn", "Machine Dalal"],
+    footerLine: "From first wireframe to final handoff.",
   },
   {
     atomicNumber: 4,
@@ -143,7 +161,17 @@ export const SKILL_GROUPS: Skill[] = [
     name: "Design Systems",
     category: "Design",
     isBrand: false,
-    projects: ["OOH Audit", "Eikaebana", "purchasing.ai"],
+    projects: [
+      "OOH Audit",
+      "Eikaebana",
+      "Machine Dalal",
+      "Brand Manager",
+      "Moshpit",
+      "Fangorn Ops",
+      "Retitrak",
+      "EIkeabana",
+    ],
+    footerLine: "From first wireframe to final handoff.",
   },
   {
     atomicNumber: 5,
@@ -151,7 +179,17 @@ export const SKILL_GROUPS: Skill[] = [
     name: "Responsive Design",
     category: "Design",
     isBrand: false,
-    projects: ["Eikaebana", "Machine Dalal", "Election Atlas"],
+    projects: [
+      "OOH Audit",
+      "Eikaebana",
+      "Machine Dalal",
+      "Brand Manager",
+      "Moshpit",
+      "Fangorn Ops",
+      "Retitrak",
+      "EIkeabana",
+    ],
+    footerLine: "From first wireframe to final handoff.",
   },
   {
     atomicNumber: 6,
@@ -159,7 +197,14 @@ export const SKILL_GROUPS: Skill[] = [
     name: "Mobile-First",
     category: "Design",
     isBrand: false,
-    projects: ["Moshpit Field App", "Eikaebana", "Machine Dalal iOS"],
+    projects: [
+      "Moshpit",
+      "Machine Dalal",
+      "Brand Manager",
+      "Eikaebana",
+      "Retitrak",
+    ],
+    footerLine: "From first wireframe to final handoff.",
   },
 
   // 2. Tools Category
@@ -170,7 +215,17 @@ export const SKILL_GROUPS: Skill[] = [
     category: "Tools",
     isBrand: true,
     brandKey: "figma",
-    projects: ["OOH Audit", "Eikaebana", "Machine Dalal", "purchasing.ai"],
+    projects: [
+      "OOH Audit",
+      "Eikaebana",
+      "Machine Dalal",
+      "Brand Manager",
+      "Moshpit",
+      "Fangorn Ops",
+      "Retitrak",
+      "EIkeabana",
+    ],
+    footerLine: "From first wireframe to final handoff.",
   },
   {
     atomicNumber: 8,
@@ -386,23 +441,24 @@ export const PROJECTS: Project[] = [
     uiType: "marketplace",
   },
   {
-    id: "election-atlas",
+    id: "brand-manager",
     index: "04",
-    title: "Election Data Visualization",
-    kicker: "Interactive Visual Atlas",
+    title: "Brand Manager App",
+    kicker: "Executive Monitoring Mobile App",
     description:
-      "Designed a data-driven editorial project turning national election data into structured, easy-to-read visuals and interactive cartographic atlases.",
+      "Designed the Brand Manager mobile application empowering brand leaders and executives with live campaign monitoring, real-time audit approvals, and proof-of-performance analytics.",
     features: [
-      "Interactive national and constituency election maps",
-      "Clean cognitive visualization of dense demographic data",
-      "Multi-party seat share and margin comparison charts",
-      "Editorial publication-grade information architecture",
+      "Live executive campaign monitoring and audit logs",
+      "Real-time proof verification and inspection approvals",
+      "Instant push notifications for campaign milestones",
+      "Seamless cross-platform deployment on iOS and Android",
     ],
-    tech: ["Data Visualization", "Illustrator", "Figma", "User Flows"],
-    liveUrl: "https://meradesh.org/",
+    tech: ["iOS", "Android", "UI/UX Design", "Data Visualization"],
+    liveUrl: "https://oohaudit.com/",
     caseStudyUrl:
-      "https://www.behance.net/gallery/246130093/Election-Data-Visualization-A-Visual-Atlas",
-    uiType: "atlas",
+      "https://www.behance.net/gallery/251451983/OOH-Audit-Tamper-Proof-Field-Verification-Ecosystem",
+    appStoreUrl: "https://apps.apple.com/in/app/moshpit-app/id1438508518",
+    uiType: "dashboard",
   },
   {
     id: "smarttoonkids",
@@ -422,22 +478,24 @@ export const PROJECTS: Project[] = [
     uiType: "video",
   },
   {
-    id: "purchasing-ai",
+    id: "moshpit-app",
     index: "06",
-    title: "purchasing.ai & Enterprise Suite",
-    kicker: "SaaS Demand Forecasting & Open Data",
+    title: "Moshpit App",
+    kicker: "Tamper-Proof Field Verification App",
     description:
-      "Suite of specialized production platforms at Hashbrown Systems, including purchasing.ai (B2B PO and vendor management with ML demand forecasting), Retibazaar, and Meradesh.",
+      "Designed Moshpit, a tamper-proof mobile application for field auditors to capture geo-tagged proof of performance, monitor live campaign sites, and accelerate field workflows.",
     features: [
-      "ML-backed purchase order and vendor forecasting UI",
-      "Retitrak cross-platform outdoor advertising dashboards",
-      "Meradesh open data geographic analytics platform",
-      "Structured reusable component design libraries",
+      "Tamper-proof field proof with geo-tagged logs & timestamps",
+      "Offline-first camera capture for low-connectivity zones",
+      "Automated sync with Brand Manager executive dashboards",
+      "Seamless cross-platform deployment on iOS and Android",
     ],
-    tech: ["Dashboard Design", "Design Systems", "Developer Handoff"],
-    liveUrl: "https://purchasing.ai/",
-    appStoreUrl: "https://apps.apple.com/us/app/purchasing-ai/id1301905276",
-    uiType: "saas",
+    tech: ["iOS", "Android", "Mobile-First", "UI/UX Design"],
+    liveUrl: "https://oohaudit.com/",
+    caseStudyUrl:
+      "https://www.behance.net/gallery/251451983/OOH-Audit-Tamper-Proof-Field-Verification-Ecosystem",
+    appStoreUrl: "https://apps.apple.com/in/app/moshpit-app/id1438508518",
+    uiType: "mobile",
   },
 ];
 

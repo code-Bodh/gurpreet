@@ -180,8 +180,6 @@ export function Hero() {
           <div className="section-tag inline-flex items-center gap-2 mb-3">
             <span className="w-2 h-2 rounded-full bg-[#0d0d0d]" />
             <span>{PROFILE.location}</span>
-            <span>·</span>
-            <span>{PROFILE.status}</span>
           </div>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[#0d0d0d] leading-none mb-4">
@@ -197,22 +195,22 @@ export function Hero() {
               onClick={() => scrollTo("#work")}
               className="btn-primary"
             >
-              Explore work
+              View My Work
             </button>
+            <a
+              href={PROFILE.resumePath}
+              download
+              className="btn-secondary"
+              aria-label="Download Resume PDF"
+            >
+              Download Resume
+            </a>
             <button
               onClick={() => scrollTo("#contact")}
               className="btn-secondary"
             >
               Let&apos;s talk
             </button>
-            <a
-              href={PROFILE.resumePath}
-              download
-              className="btn-secondary"
-              aria-label="Download Résumé PDF"
-            >
-              Résumé ↓
-            </a>
           </div>
         </div>
       </div>

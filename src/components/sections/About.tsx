@@ -75,7 +75,7 @@ export function About() {
         </div>
 
         <h2 className="section-heading">
-          Designing systems, <em>quietly.</em>
+          Designing products that <em>work.</em>
         </h2>
 
         {/* Three-Column Equal Height Grid */}
@@ -174,9 +174,11 @@ export function About() {
                   {/* Top Black Band */}
                   <div className="w-full bg-[#0d0d0d] text-[#f4f2ee] py-2 px-3 rounded-xl flex items-center justify-between">
                     <span className="font-mono text-[9px] uppercase tracking-widest font-semibold">
-                      DESIGNER ID
+                      DESIGNER PROFILE
                     </span>
-                    <span className="font-mono text-[9px] text-[#a9a6a0]">2026</span>
+                    <span className="font-mono text-[9px] text-[#a9a6a0] font-semibold tracking-wider uppercase">
+                      OPEN TO WORK
+                    </span>
                   </div>
 
                   {/* Centered Photo Frame */}
@@ -202,18 +204,22 @@ export function About() {
                   </div>
 
                   {/* Info Rows */}
-                  <div className="grid grid-cols-3 gap-2 py-2 border-y border-[#0d0d0d]/10 text-center font-mono text-[9px]">
-                    <div>
-                      <span className="text-[#a9a6a0] block uppercase">ID No.</span>
-                      <span className="font-semibold text-[#0d0d0d]">GK-0917</span>
+                  <div className="grid grid-cols-3 gap-1 py-2 border-y border-[#0d0d0d]/10 text-center font-mono text-[9px]">
+                    <div className="px-1">
+                      <span className="text-[#a9a6a0] block uppercase text-[8px] tracking-wider">EXPERIENCE</span>
+                      <span className="font-semibold text-[#0d0d0d] text-[10px] block mt-0.5">9+ Years</span>
                     </div>
-                    <div>
-                      <span className="text-[#a9a6a0] block uppercase">Dept.</span>
-                      <span className="font-semibold text-[#0d0d0d]">UI / UX</span>
+                    <div className="px-1 border-x border-[#0d0d0d]/10">
+                      <span className="text-[#a9a6a0] block uppercase text-[8px] tracking-wider">FOCUS</span>
+                      <span className="font-semibold text-[#0d0d0d] text-[8px] leading-tight block mt-0.5">
+                        SaaS · Mobile · eCommerce
+                      </span>
                     </div>
-                    <div>
-                      <span className="text-[#a9a6a0] block uppercase">Valid Till</span>
-                      <span className="font-semibold text-[#0d0d0d]">2026</span>
+                    <div className="px-1">
+                      <span className="text-[#a9a6a0] block uppercase text-[8px] tracking-wider">WORK MODE</span>
+                      <span className="font-semibold text-[#0d0d0d] text-[8px] leading-tight block mt-0.5">
+                        Remote / Hybrid / Full-Time
+                      </span>
                     </div>
                   </div>
 
@@ -225,9 +231,15 @@ export function About() {
                         <span key={i} className="h-full bg-[#0d0d0d]" style={{ width: `${w}px` }} />
                       ))}
                     </div>
-                    {/* Metallic Hologram Badge */}
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#d4d4d4] via-[#f5f5f5] to-[#a3a3a3] border border-[#0d0d0d]/20 flex items-center justify-center text-[7px] font-mono text-[#3a3a3a] shadow-inner">
-                      SECURE
+                    {/* Custom Logo Badge */}
+                    <div className="relative w-8 h-8 rounded-full overflow-hidden border border-[#0d0d0d]/20 shadow-sm flex items-center justify-center bg-white">
+                      <Image
+                        src="/gk-logo.png"
+                        alt="GK Logo"
+                        fill
+                        sizes="32px"
+                        className="object-contain"
+                      />
                     </div>
                   </div>
                 </div>
@@ -249,25 +261,25 @@ export function About() {
                     </div>
 
                     <h5 className="font-mono text-xs text-[#a9a6a0] uppercase tracking-wider mb-3">
-                      What I am:
+                      WHAT I AM:
                     </h5>
 
                     <ul className="space-y-2.5 text-xs text-[#e9e6e0] leading-snug font-sans">
                       <li className="flex items-start gap-2">
                         <span className="text-[#a9a6a0] font-mono">01</span>
-                        <span>Senior UI/UX & Graphic Designer (9+ Years experience)</span>
+                        <span>Senior UI/UX &amp; Graphic Designer with 9+ years of craft</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <span className="text-[#a9a6a0] font-mono">02</span>
-                        <span>B.Tech in Computer Science (2011–2014)</span>
+                        <span>The lead designer behind 10+ live products</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <span className="text-[#a9a6a0] font-mono">03</span>
-                        <span>Lead designer on 10+ live enterprise and consumer products</span>
+                        <span>The reason tasks got ~30% faster and carts converted 15-20% more</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <span className="text-[#a9a6a0] font-mono">04</span>
-                        <span>OOH Audit, Eikaebana, Machine Dalal, Election Atlas</span>
+                        <span>The hand behind logos, brands, pitch decks &amp; social creatives</span>
                       </li>
                     </ul>
                   </div>

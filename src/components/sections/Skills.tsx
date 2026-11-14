@@ -172,7 +172,7 @@ export function Skills() {
             </div>
 
             <div className="mt-6 pt-4 border-t border-[#0d0d0d]/10 font-mono text-[9px] text-[#a9a6a0]">
-              Verified skill from official curriculum vitae.
+              {selectedSkill.footerLine || "From first wireframe to final handoff."}
             </div>
           </div>
         </div>

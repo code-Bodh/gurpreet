@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { NAV, PROFILE } from "@/lib/data";
 import { useScroll } from "@/lib/scroll";
 
@@ -101,13 +102,16 @@ export function Navigation() {
             <button
               onClick={() => handleNavClick("#hero")}
               aria-label="Back to top"
-              className={`w-10 h-10 rounded-full flex items-center justify-center font-mono text-xs font-semibold tracking-wider transition-all duration-500 hover:rotate-[360deg] ${
-                scrolled
-                  ? "bg-[#0d0d0d] text-[#f4f2ee] shadow-md border border-transparent"
-                  : "bg-transparent text-[#0d0d0d] border border-[#0d0d0d]/30"
-              }`}
+              className="relative w-10 h-10 rounded-full overflow-hidden flex items-center justify-center transition-all duration-500 hover:rotate-[360deg] hover:scale-105 border border-[#0d0d0d]/15 shadow-sm bg-white shrink-0"
             >
-              {PROFILE.initials}
+              <Image
+                src="/gk-logo.png"
+                alt="Gurpreet Kaur Logo"
+                fill
+                sizes="40px"
+                className="object-contain"
+                priority
+              />
             </button>
             <span
               className={`text-sm font-semibold tracking-tight transition-all duration-500 hidden sm:inline-block ${

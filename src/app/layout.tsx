@@ -36,14 +36,14 @@ const jetbrainsMono = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://designsbykaur.com"),
-  title: "Gurpreet Kaur — Senior UI/UX Designer",
+  title: "Gurpreet Kaur — Senior UI/UX & Graphic Designer",
   description:
-    "Senior UI/UX Designer with 9+ years of experience leading design for websites, mobile apps, SaaS & eCommerce platforms. Chandigarh, India.",
+    "Senior UI/UX & Graphic Designer with 9+ years of experience leading design for websites, mobile apps, SaaS & eCommerce platforms. Chandigarh, India.",
   authors: [{ name: "Gurpreet Kaur" }],
   openGraph: {
-    title: "Gurpreet Kaur — Senior UI/UX Designer",
+    title: "Gurpreet Kaur — Senior UI/UX & Graphic Designer",
     description:
-      "Senior UI/UX Designer with 9+ years of experience leading design for websites, mobile apps, SaaS & eCommerce platforms.",
+      "Senior UI/UX & Graphic Designer with 9+ years of experience leading design for websites, mobile apps, SaaS & eCommerce platforms.",
     url: "https://designsbykaur.com",
     siteName: "Gurpreet Kaur Portfolio",
     images: [
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
         url: "/og.jpg",
         width: 1200,
         height: 630,
-        alt: "Gurpreet Kaur — Senior UI/UX Designer",
+        alt: "Gurpreet Kaur — Senior UI/UX & Graphic Designer",
       },
     ],
     locale: "en_US",
