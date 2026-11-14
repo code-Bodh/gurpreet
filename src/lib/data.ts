@@ -134,7 +134,7 @@ export const SKILL_GROUPS: Skill[] = [
   },
   {
     atomicNumber: 2,
-    symbol: "Ux",
+    symbol: "Dv",
     name: "Data Visualization",
     category: "Design",
     isBrand: false,
@@ -148,7 +148,7 @@ export const SKILL_GROUPS: Skill[] = [
   },
   {
     atomicNumber: 3,
-    symbol: "Ux",
+    symbol: "Dd",
     name: "Dashboard Design",
     category: "Design",
     isBrand: false,
