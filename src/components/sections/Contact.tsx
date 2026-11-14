@@ -100,6 +100,19 @@ export function Contact() {
                 <span>{PROFILE.phone}</span>
               </a>
               <span className="text-[#a9a6a0]">/</span>
+              {PROFILE.linkedin && (
+                <>
+                  <a
+                    href={PROFILE.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:underline text-[#0077b5]"
+                  >
+                    LinkedIn ↗
+                  </a>
+                  <span className="text-[#a9a6a0]">/</span>
+                </>
+              )}
               {PROFILE.behance && (
                 <>
                   <a

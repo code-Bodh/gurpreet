@@ -100,7 +100,7 @@ export const PROFILE: Profile = {
   instagram: "https://www.instagram.com/smarttoonkids/",
   resumePath: "/resume.pdf",
   github: "",
-  linkedin: "",
+  linkedin: "https://www.linkedin.com/in/gurpreet-kaur-uiux-designer",
 };
 
 export const NAV: NavItem[] = [
@@ -116,7 +116,7 @@ export const SKILL_GROUPS: Skill[] = [
   // 1. Design Category
   {
     atomicNumber: 1,
-    symbol: "Ux",
+    symbol: "UX",
     name: "UI/UX Design",
     category: "Design",
     isBrand: false,
@@ -134,7 +134,7 @@ export const SKILL_GROUPS: Skill[] = [
   },
   {
     atomicNumber: 2,
-    symbol: "Dv",
+    symbol: "DV",
     name: "Data Visualization",
     category: "Design",
     isBrand: false,
@@ -148,7 +148,7 @@ export const SKILL_GROUPS: Skill[] = [
   },
   {
     atomicNumber: 3,
-    symbol: "Dd",
+    symbol: "DD",
     name: "Dashboard Design",
     category: "Design",
     isBrand: false,
@@ -157,7 +157,7 @@ export const SKILL_GROUPS: Skill[] = [
   },
   {
     atomicNumber: 4,
-    symbol: "Ds",
+    symbol: "DS",
     name: "Design Systems",
     category: "Design",
     isBrand: false,
@@ -175,7 +175,7 @@ export const SKILL_GROUPS: Skill[] = [
   },
   {
     atomicNumber: 5,
-    symbol: "Rs",
+    symbol: "RS",
     name: "Responsive Design",
     category: "Design",
     isBrand: false,
@@ -193,7 +193,7 @@ export const SKILL_GROUPS: Skill[] = [
   },
   {
     atomicNumber: 6,
-    symbol: "Mf",
+    symbol: "MF",
     name: "Mobile-First",
     category: "Design",
     isBrand: false,
@@ -210,7 +210,7 @@ export const SKILL_GROUPS: Skill[] = [
   // 2. Tools Category
   {
     atomicNumber: 7,
-    symbol: "Fg",
+    symbol: "FG",
     name: "Figma",
     category: "Tools",
     isBrand: true,
@@ -229,7 +229,7 @@ export const SKILL_GROUPS: Skill[] = [
   },
   {
     atomicNumber: 8,
-    symbol: "Xd",
+    symbol: "XD",
     name: "Adobe XD",
     category: "Tools",
     isBrand: true,
@@ -238,7 +238,7 @@ export const SKILL_GROUPS: Skill[] = [
   },
   {
     atomicNumber: 9,
-    symbol: "Ps",
+    symbol: "PS",
     name: "Photoshop",
     category: "Tools",
     isBrand: true,
@@ -247,7 +247,7 @@ export const SKILL_GROUPS: Skill[] = [
   },
   {
     atomicNumber: 10,
-    symbol: "Ai",
+    symbol: "AI",
     name: "Illustrator",
     category: "Tools",
     isBrand: true,
@@ -256,7 +256,7 @@ export const SKILL_GROUPS: Skill[] = [
   },
   {
     atomicNumber: 11,
-    symbol: "Ex",
+    symbol: "EX",
     name: "Adobe Express",
     category: "Tools",
     isBrand: true,
@@ -265,7 +265,7 @@ export const SKILL_GROUPS: Skill[] = [
   },
   {
     atomicNumber: 12,
-    symbol: "Ff",
+    symbol: "FF",
     name: "Adobe Firefly",
     category: "Tools",
     isBrand: true,
@@ -274,7 +274,7 @@ export const SKILL_GROUPS: Skill[] = [
   },
   {
     atomicNumber: 13,
-    symbol: "Cv",
+    symbol: "CV",
     name: "Canva",
     category: "Tools",
     isBrand: true,
@@ -283,7 +283,7 @@ export const SKILL_GROUPS: Skill[] = [
   },
   {
     atomicNumber: 14,
-    symbol: "Kn",
+    symbol: "KN",
     name: "Keynote",
     category: "Tools",
     isBrand: true,
@@ -294,7 +294,7 @@ export const SKILL_GROUPS: Skill[] = [
   // 3. AI Tools Category
   {
     atomicNumber: 15,
-    symbol: "Gp",
+    symbol: "GP",
     name: "ChatGPT",
     category: "AI Tools",
     isBrand: true,
@@ -303,7 +303,7 @@ export const SKILL_GROUPS: Skill[] = [
   },
   {
     atomicNumber: 16,
-    symbol: "Cd",
+    symbol: "CD",
     name: "Claude",
     category: "AI Tools",
     isBrand: true,
@@ -312,7 +312,7 @@ export const SKILL_GROUPS: Skill[] = [
   },
   {
     atomicNumber: 17,
-    symbol: "Gm",
+    symbol: "GM",
     name: "Gemini",
     category: "AI Tools",
     isBrand: true,
@@ -321,7 +321,7 @@ export const SKILL_GROUPS: Skill[] = [
   },
   {
     atomicNumber: 18,
-    symbol: "St",
+    symbol: "ST",
     name: "Stitch",
     category: "AI Tools",
     isBrand: true,
@@ -330,7 +330,7 @@ export const SKILL_GROUPS: Skill[] = [
   },
   {
     atomicNumber: 19,
-    symbol: "Mt",
+    symbol: "MT",
     name: "Meta AI",
     category: "AI Tools",
     isBrand: true,
@@ -341,7 +341,7 @@ export const SKILL_GROUPS: Skill[] = [
   // 4. Process Category
   {
     atomicNumber: 20,
-    symbol: "Ur",
+    symbol: "UR",
     name: "User Research",
     category: "Process",
     isBrand: false,
@@ -349,7 +349,7 @@ export const SKILL_GROUPS: Skill[] = [
   },
   {
     atomicNumber: 21,
-    symbol: "Wf",
+    symbol: "WF",
     name: "Wireframing",
     category: "Process",
     isBrand: false,
@@ -357,7 +357,7 @@ export const SKILL_GROUPS: Skill[] = [
   },
   {
     atomicNumber: 22,
-    symbol: "Pr",
+    symbol: "PR",
     name: "Prototyping",
     category: "Process",
     isBrand: false,
@@ -365,7 +365,7 @@ export const SKILL_GROUPS: Skill[] = [
   },
   {
     atomicNumber: 23,
-    symbol: "Uf",
+    symbol: "UF",
     name: "User Flows",
     category: "Process",
     isBrand: false,
@@ -373,7 +373,7 @@ export const SKILL_GROUPS: Skill[] = [
   },
   {
     atomicNumber: 24,
-    symbol: "Dh",
+    symbol: "DH",
     name: "Developer Handoff",
     category: "Process",
     isBrand: false,

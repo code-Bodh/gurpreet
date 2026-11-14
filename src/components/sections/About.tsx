@@ -101,6 +101,16 @@ export function About() {
               <a href={PROFILE.resumePath} download className="btn-primary text-xs">
                 Résumé ↓
               </a>
+              {PROFILE.linkedin && (
+                <a
+                  href={PROFILE.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-secondary text-xs"
+                >
+                  LinkedIn ↗
+                </a>
+              )}
               {PROFILE.behance && (
                 <a
                   href={PROFILE.behance}
@@ -186,11 +196,11 @@ export function About() {
                     <div className="relative w-[128px] h-[156px] rounded-2xl overflow-hidden border-2 border-[#e9e6e0] shadow-sm p-1 group">
                       <div className="w-full h-full relative rounded-xl overflow-hidden bg-[#f4f2ee]">
                         <Image
-                          src="/portrait-bust.webp"
+                          src="/portrait-bust.png"
                           alt="Gurpreet Kaur Portrait"
                           fill
                           sizes="128px"
-                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                          className="object-contain transition-transform duration-500 group-hover:scale-105"
                         />
                       </div>
                     </div>
@@ -285,8 +295,22 @@ export function About() {
                   </div>
 
                   <div className="pt-4 border-t border-white/10">
-                    <div className="font-serif italic text-sm text-[#a9a6a0] mb-2">
-                      Gurpreet Kaur
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="font-serif italic text-sm text-[#a9a6a0]">
+                        Gurpreet Kaur
+                      </div>
+                      {PROFILE.linkedin && (
+                        <a
+                          href={PROFILE.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-mono text-[9px] text-[#ffffff] bg-[#0077b5] hover:bg-[#005582] px-2.5 py-1 rounded-full transition-colors flex items-center gap-1 shadow-sm"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <span>LinkedIn</span>
+                          <span>↗</span>
+                        </a>
+                      )}
                     </div>
                     <p className="font-mono text-[9px] text-[#77756f]">
                       If found, say hello · {PROFILE.email}

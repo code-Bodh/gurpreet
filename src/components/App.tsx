@@ -9,6 +9,7 @@ import { Work } from "@/components/sections/Work";
 import { Experience } from "@/components/sections/Experience";
 import { Achievements } from "@/components/sections/Achievements";
 import { Contact } from "@/components/sections/Contact";
+import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 
 export function App() {
   // Global RevealObserver for .rv and .rv-mask elements (animates once only)
@@ -51,6 +52,7 @@ export function App() {
         <Achievements />
         <Contact />
       </main>
+      <FloatingWhatsApp />
     </div>
   );
 }

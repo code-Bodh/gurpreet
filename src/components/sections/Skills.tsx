@@ -12,9 +12,41 @@ const CATEGORIES: ("All" | SkillCategory)[] = [
   "Process",
 ];
 
+function playPopSound() {
+  if (typeof window === "undefined") return;
+  try {
+    const AudioCtx =
+      window.AudioContext ||
+      (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+    if (!AudioCtx) return;
+    const ctx = new AudioCtx();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = "sine";
+    // Soft, satisfying UI pop (frequency falls from 620Hz to 220Hz over 50ms)
+    osc.frequency.setValueAtTime(620, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(220, ctx.currentTime + 0.05);
+    gain.gain.setValueAtTime(0.07, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.05);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.05);
+  } catch {
+    // Silently continue if audio context is blocked
+  }
+}
+
 export function Skills() {
   const [activeCategory, setActiveCategory] = useState<"All" | SkillCategory>("All");
   const [selectedSkill, setSelectedSkill] = useState<Skill>(SKILL_GROUPS[0]);
+
+  const handleSelect = (skill: Skill, isUserClick = false) => {
+    setSelectedSkill(skill);
+    if (isUserClick) {
+      playPopSound();
+    }
+  };
 
   return (
     <section id="skills" className="section-pad relative w-full border-t border-[#0d0d0d]/10">
@@ -62,17 +94,17 @@ export function Skills() {
               return (
                 <button
                   key={skill.name}
-                  onClick={() => setSelectedSkill(skill)}
-                  onMouseEnter={() => setSelectedSkill(skill)}
-                  onFocus={() => setSelectedSkill(skill)}
+                  onClick={() => handleSelect(skill, true)}
+                  onMouseEnter={() => handleSelect(skill, false)}
+                  onFocus={() => handleSelect(skill, false)}
                   style={{
                     animationDelay: `${delay}ms`,
                   }}
-                  className={`relative p-3 rounded-2xl flex flex-col justify-between text-left transition-all duration-300 aspect-square border ${
+                  className={`relative p-3 rounded-2xl flex flex-col justify-between text-left transition-all duration-300 aspect-square border cursor-pointer select-none active:scale-95 ${
                     isSelected
-                      ? "bg-[#0d0d0d] text-[#f4f2ee] border-[#0d0d0d] shadow-lg scale-105 z-10"
+                      ? "bg-[#0d0d0d] text-[#f4f2ee] border-[#0d0d0d] shadow-xl scale-105 z-10 ring-2 ring-[#0d0d0d]/20"
                       : matchesFilter
-                      ? "bg-white text-[#0d0d0d] border-[#0d0d0d]/10 hover:border-[#0d0d0d]/40 hover:shadow-md"
+                      ? "bg-white text-[#0d0d0d] border-[#0d0d0d]/10 hover:border-[#0d0d0d]/40 hover:shadow-md hover:scale-[1.03]"
                       : "bg-[#e9e6e0]/50 text-[#a9a6a0] border-transparent opacity-35"
                   }`}
                 >
@@ -82,14 +114,14 @@ export function Skills() {
                     <span>{skill.category.substring(0, 2).toUpperCase()}</span>
                   </div>
 
-                  {/* 2-Letter Symbol */}
+                  {/* 2-Letter Symbol in Full Uppercase */}
                   <div className="my-auto text-center w-full">
                     <span
-                      className={`text-xl sm:text-2xl font-bold tracking-tight font-mono ${
-                        isSelected ? "text-[#f4f2ee]" : "text-[#0d0d0d]"
+                      className={`text-xl sm:text-2xl font-bold tracking-tight font-mono transition-transform duration-200 ${
+                        isSelected ? "text-[#f4f2ee] scale-110 inline-block" : "text-[#0d0d0d]"
                       }`}
                     >
-                      {skill.symbol}
+                      {skill.symbol.toUpperCase()}
                     </span>
                   </div>
 
@@ -115,7 +147,10 @@ export function Skills() {
               </div>
 
               {/* Logo Presentation (150px visual box with pop animation) */}
-              <div className="w-full h-44 rounded-2xl bg-[#f4f2ee] flex items-center justify-center p-6 mb-6 relative overflow-hidden group">
+              <div
+                key={selectedSkill.name}
+                className="w-full h-44 rounded-2xl bg-[#f4f2ee] flex items-center justify-center p-6 mb-6 relative overflow-hidden group transition-all duration-300"
+              >
                 <div className="transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110">
                   <TechLogo
                     name={selectedSkill.brandKey || selectedSkill.name}
@@ -134,7 +169,7 @@ export function Skills() {
                     {selectedSkill.name}
                   </h3>
                   <span className="font-mono text-sm font-bold text-[#77756f]">
-                    [{selectedSkill.symbol}]
+                    [{selectedSkill.symbol.toUpperCase()}]
                   </span>
                 </div>
 

@@ -7,55 +7,54 @@ import { useScroll } from "@/lib/scroll";
 export function Hero() {
   const { scrollTo } = useScroll();
   const videoRef = useRef<HTMLVideoElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
   const heroRef = useRef<HTMLElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
-  const [autoplayBlocked, setAutoplayBlocked] = useState(true);
+  const [isVoicePlaying, setIsVoicePlaying] = useState(false);
+  const [autoplayBlocked, setAutoplayBlocked] = useState(false);
 
-  // Video Autoplay & Sound Unlock Logic
+  // Play audio greeting: "Hey, I am Gurpreet, senior UI/UX designer."
+  const playGreeting = () => {
+    const audio = audioRef.current;
+    if (audio) {
+      audio.currentTime = 0;
+      audio
+        .play()
+        .then(() => {
+          setIsVoicePlaying(true);
+          setIsMuted(false);
+        })
+        .catch(() => {
+          // Web Speech fallback if audio file playback is blocked
+          if (typeof window !== "undefined" && "speechSynthesis" in window) {
+            window.speechSynthesis.cancel();
+            const utter = new SpeechSynthesisUtterance("Hey, I am Gurpreet, senior UI/UX designer.");
+            utter.rate = 0.95;
+            utter.onend = () => {
+              setIsVoicePlaying(false);
+              setIsMuted(true);
+            };
+            window.speechSynthesis.speak(utter);
+            setIsVoicePlaying(true);
+            setIsMuted(false);
+          }
+        });
+    }
+  };
+
+  // Video Autoplay (Silent video loop)
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    // Try playing with sound initially
-    video.muted = false;
+    video.muted = true;
     video
       .play()
       .then(() => {
         setIsPlaying(true);
-        setIsMuted(false);
-        setAutoplayBlocked(false);
       })
-      .catch(() => {
-        // Autoplay with sound blocked; fallback to muted autoplay
-        video.muted = true;
-        setIsMuted(true);
-        setAutoplayBlocked(true);
-        video.play().then(() => setIsPlaying(true)).catch(() => {});
-      });
-
-    // Unlock sound on first user gesture
-    const unlockSound = () => {
-      if (video) {
-        video.muted = false;
-        setIsMuted(false);
-        setAutoplayBlocked(false);
-        if (video.paused) video.play();
-      }
-      window.removeEventListener("pointerdown", unlockSound);
-      window.removeEventListener("keydown", unlockSound);
-      window.removeEventListener("touchend", unlockSound);
-    };
-
-    window.addEventListener("pointerdown", unlockSound, { once: true });
-    window.addEventListener("keydown", unlockSound, { once: true });
-    window.addEventListener("touchend", unlockSound, { once: true });
-
-    return () => {
-      window.removeEventListener("pointerdown", unlockSound);
-      window.removeEventListener("keydown", unlockSound);
-      window.removeEventListener("touchend", unlockSound);
-    };
+      .catch(() => {});
   }, []);
 
   // IntersectionObserver: Pause video when less than 35% visible; resume when visible
@@ -72,6 +71,10 @@ export function Hero() {
         } else {
           video.pause();
           setIsPlaying(false);
+          const audio = audioRef.current;
+          if (audio) audio.pause();
+          setIsVoicePlaying(false);
+          setIsMuted(true);
         }
       },
       {
@@ -83,19 +86,18 @@ export function Hero() {
     return () => observer.disconnect();
   }, []);
 
-  // Toggle Sound Button
+  // Toggle Sound Button: Plays "Hey, I am Gurpreet, senior UI/UX designer."
   const toggleSound = () => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    if (video.muted) {
-      video.muted = false;
-      setIsMuted(false);
-      setAutoplayBlocked(false);
-      if (video.paused) video.play();
-    } else {
-      video.muted = true;
+    const audio = audioRef.current;
+    if (isVoicePlaying) {
+      if (audio) audio.pause();
+      if (typeof window !== "undefined" && "speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
+      setIsVoicePlaying(false);
       setIsMuted(true);
+    } else {
+      playGreeting();
     }
   };
 
@@ -133,11 +135,11 @@ export function Hero() {
           >
             <video
               ref={videoRef}
-              muted={isMuted}
+              muted
               loop
               playsInline
               preload="auto"
-              poster="/portrait-bust.webp"
+              poster="/portrait-bust.png"
               className="w-full h-full object-contain mix-blend-multiply"
               style={{
                 filter: "contrast(1.02) brightness(1.01)",
@@ -146,31 +148,62 @@ export function Hero() {
               <source src="/hero/hero.webm" type="video/webm" />
               <source src="/hero/hero.mp4" type="video/mp4" />
             </video>
+
+            {/* Voice Audio Track */}
+            <audio
+              ref={audioRef}
+              preload="auto"
+              onEnded={() => {
+                setIsVoicePlaying(false);
+                setIsMuted(true);
+              }}
+            >
+              <source src="/hero/intro-voice.m4a" type="audio/mp4" />
+              <source src="/hero/intro-voice.wav" type="audio/wav" />
+            </audio>
           </div>
 
           {/* Floating Sound Control Button */}
           <div className="absolute bottom-6 right-6 z-20">
-            <div className="relative">
+            <div className="relative group/sound">
               {autoplayBlocked && (
                 <span className="absolute inset-0 rounded-full bg-[#0d0d0d]/20 animate-ping pointer-events-none" />
               )}
               <button
                 onClick={toggleSound}
-                aria-label={isMuted ? "Unmute intro video audio" : "Mute intro video audio"}
+                aria-label={
+                  isVoicePlaying
+                    ? "Pause voice intro"
+                    : "Play voice intro: Hey I am Gurpreet, senior UI/UX designer"
+                }
                 className="w-[46px] h-[46px] rounded-full bg-[#0d0d0d] text-[#ffffff] flex items-center justify-center shadow-lg transition-transform duration-300 hover:scale-105 active:scale-95"
               >
-                {isMuted ? (
-                  // ▶ Play / Unmute icon
+                {isVoicePlaying ? (
+                  // Sound waves / Pause icon
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M8 5v14l11-7z" />
+                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
                   </svg>
                 ) : (
-                  // ❚❚ Pause / Mute icon
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                  // Speaker / Play voice icon
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor" />
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
                   </svg>
                 )}
               </button>
+              {/* Tooltip */}
+              <div className="absolute right-full top-1/2 -translate-y-1/2 mr-3 px-3 py-1.5 rounded-xl bg-[#0d0d0d] text-[#f4f2ee] text-[11px] font-mono tracking-tight whitespace-nowrap opacity-0 group-hover/sound:opacity-100 transition-opacity pointer-events-none shadow-md">
+                {isVoicePlaying ? "Playing intro..." : 'Voice: "Hey, I am Gurpreet..."'}
+              </div>
             </div>
           </div>
         </div>
